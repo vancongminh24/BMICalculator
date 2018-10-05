@@ -15,7 +15,7 @@ namespace BMICalculator.Core.ViewModels
         private double _height;
         private double _bmi;
 
-        public string WeightLabel => "Cân Nặng (kg)";
+        public string WeightLabel => "Cân Nặng (kg)"; //same as method{}
         public string HeightLabel => "Chiều Cao (m)";
         public string BMILabel => "BMI";
         public string CalculateLabel => "Calculate";
@@ -23,13 +23,14 @@ namespace BMICalculator.Core.ViewModels
         public BMICalculatorViewModel(IBMICalculatorService bmiCalculatorService)
         {
             _bmiCalculatorService = bmiCalculatorService;
-            BmiButtonClickedCommand = new MvxCommand(BmiButtonClicked);
+            BmiButtonClickedCommand = new MvxCommand(CalculateBMI);
         }
         public override async Task Initialize()
         {
             await base.Initialize();
             _weight = 0;
             _height = 0;
+            
         }
 
         public double Weight
@@ -62,11 +63,6 @@ namespace BMICalculator.Core.ViewModels
         }
 
         public IMvxCommand BmiButtonClickedCommand { get; set; }
-
-        public void BmiButtonClicked()
-        {
-            CalculateBMI();
-        }
 
         public void CalculateBMI()
         {
