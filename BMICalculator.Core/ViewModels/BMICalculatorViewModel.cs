@@ -54,11 +54,11 @@ namespace BMICalculator.Core.ViewModels
         public double BMI
         {
             get => _bmi;
-            set
-            {
-                _bmi = value;
-                RaisePropertyChanged(() => BMI);
-            }
+            set => SetProperty(ref _bmi, value);
+            //{
+            //    _bmi = value;
+            //    RaisePropertyChanged(() => BMI);
+            //}
         }
 
         public IMvxCommand BmiButtonClickedCommand { get; set; }
