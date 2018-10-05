@@ -1,0 +1,8 @@
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\bin\Debug\netcoreapp2.1\BMICalculator.Core.deps.json
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\bin\Debug\netcoreapp2.1\BMICalculator.Core.runtimeconfig.json
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\bin\Debug\netcoreapp2.1\BMICalculator.Core.runtimeconfig.dev.json
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\bin\Debug\netcoreapp2.1\BMICalculator.Core.dll
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\obj\Debug\netcoreapp2.1\BMICalculator.Core.csprojAssemblyReference.cache
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\obj\Debug\netcoreapp2.1\BMICalculator.Core.csproj.CoreCompileInputs.cache
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\obj\Debug\netcoreapp2.1\BMICalculator.Core.AssemblyInfoInputs.cache
+C:\Users\vanm\source\repos\BMICalculator.Core\BMICalculator.Core\obj\Debug\netcoreapp2.1\BMICalculator.Core.AssemblyInfo.cs
