@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BMICalculator.Core.Services;
 using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace BMICalculator.Core.ViewModels
@@ -11,6 +12,7 @@ namespace BMICalculator.Core.ViewModels
     public class BMICalculatorViewModel : MvxViewModel
     {
         readonly IBMICalculatorService _bmiCalculatorService;
+        private readonly IMvxNavigationService _navigationService;
         private double _weight;
         private double _height;
         private double _bmi;
@@ -20,10 +22,11 @@ namespace BMICalculator.Core.ViewModels
         public string BMILabel => "BMI";
         public string CalculateLabel => "Calculate";
 
-        public BMICalculatorViewModel(IBMICalculatorService bmiCalculatorService)
+        public BMICalculatorViewModel(IBMICalculatorService bmiCalculatorService, IMvxNavigationService navigationService)
         {
             _bmiCalculatorService = bmiCalculatorService;
-            BmiButtonClickedCommand = new MvxCommand(CalculateBMI);
+            _navigationService = navigationService;
+            ShowBMIResultCommand = new MvxCommand(CalculateBMI);
         }
         public override async Task Initialize()
         {
@@ -62,9 +65,9 @@ namespace BMICalculator.Core.ViewModels
             //}
         }
 
-        public IMvxCommand BmiButtonClickedCommand { get; set; }
-
-        public void CalculateBMI()
+        public IMvxCommand ShowBMIResultCommand { get; set; }
+	    
+		public void CalculateBMI()
         {
             BMI = _bmiCalculatorService.CalculateBMI(_weight, _height);
         }
