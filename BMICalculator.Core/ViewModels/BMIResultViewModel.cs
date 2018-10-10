@@ -5,17 +5,18 @@ using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 using MvvmCross.Navigation;
 using System.Threading.Tasks;
+using MvvmCross;
 
 namespace BMICalculator.Core.ViewModels
 {
     public class BMIResultViewModel : MvxViewModel, IMvxViewModel<double>
     {
-        private readonly IMvxNavigationService _navigationService;
-        private double _result;
+		private IMvxNavigationService _navigationService;
+	    public IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.Resolve<IMvxNavigationService>());
+		private double _result;
 
-        public BMIResultViewModel(IMvxNavigationService navigationService)
+        public BMIResultViewModel()
         {
-            _navigationService = navigationService;
 			BackToMainCommand = new MvxCommand(BackToMain);
             //BackToMainCommand = new MvxCommand(() => { _navigationService.Close(this); });
         }
@@ -30,10 +31,10 @@ namespace BMICalculator.Core.ViewModels
             }
         }
 
-        public void Prepare(double parameter)
+        public void Prepare(double bmi)
         {
 			//receive result from MBIResultViewModel
-	        Result = parameter;
+	        Result = bmi;
         }
 
 		public MvxCommand BackToMainCommand { get; set; }
@@ -41,7 +42,7 @@ namespace BMICalculator.Core.ViewModels
 
         public void BackToMain()
         {
-            _navigationService.Close(this);
+	        NavigationService.Close(this);
         }
     }
 }
