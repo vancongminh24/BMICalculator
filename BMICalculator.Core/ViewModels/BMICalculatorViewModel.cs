@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using BMICalculator.Core.Services;
+using BMICalculator.Core.ViewModels.Base;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -10,14 +11,10 @@ using MvvmCross.ViewModels;
 
 namespace BMICalculator.Core.ViewModels
 {
-	public class BMICalculatorViewModel : MvxViewModel
+	public class BMICalculatorViewModel : BaseViewModel
 	{
 		readonly IBMICalculatorService _bmiCalculatorService;
-		private IMvxNavigationService _navigationService;
-		public IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.Resolve<IMvxNavigationService>());
 
-		private double _weight;
-		private double _height;
 		private double _bmi;
 
 		public string WeightLabel => "Cân Nặng (kg)"; //same as method{ get {return "can nang";}}
@@ -26,9 +23,9 @@ namespace BMICalculator.Core.ViewModels
 		public string CalculateLabel => "Calculate";
 		public IMvxCommand ShowBMIResultCommand { get; }
 
-		public BMICalculatorViewModel(IBMICalculatorService bmiCalculatorService)
+		public BMICalculatorViewModel()
 		{
-			_bmiCalculatorService = bmiCalculatorService;
+			
 			ShowBMIResultCommand = new MvxCommand(OnNavigateToResult);
 		}
 
@@ -41,29 +38,13 @@ namespace BMICalculator.Core.ViewModels
 		public override async Task Initialize()
 		{
 			await base.Initialize();
-			_weight = 0;
-			_height = 0;
-
+			Weight = 0;
+			Height = 0;
 		}
 
-		public double Weight
-		{
-			get => _weight;
-			set
-			{
-				_weight = value;
+		public double Weight { get; set; }
 
-			}
-		}
-
-		public double Height
-		{
-			get => _height;
-			set
-			{
-				_height = value;
-			}
-		}
+		public double Height { get; set; }
 
 		public double BMI
 		{
@@ -77,13 +58,10 @@ namespace BMICalculator.Core.ViewModels
 			//}
 		}
 
-		//public IMvxCommand ShowBMIResultCommand { get; set; }
-
-
-
 		public void CalculateBMI()
 		{
-			BMI = _bmiCalculatorService.CalculateBMI(_weight, _height);
+			var bmiCalculatorService = Mvx.IoCProvider.Resolve<IBMICalculatorService>();
+			BMI = bmiCalculatorService.CalculateBMI(Weight, Height);
 		}
 	}
 }

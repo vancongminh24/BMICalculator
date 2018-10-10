@@ -12,7 +12,7 @@ namespace BMICalculator.Core.ViewModels
     public class BMIResultViewModel : MvxViewModel, IMvxViewModel<double>
     {
 		private IMvxNavigationService _navigationService;
-	    public IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.Resolve<IMvxNavigationService>());
+	    public IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>());
 		private double _result;
 
         public BMIResultViewModel()
@@ -42,7 +42,9 @@ namespace BMICalculator.Core.ViewModels
 
         public void BackToMain()
         {
-	        NavigationService.Close(this);
+	        var navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
+	        navigationService.Close(this);
+	        //NavigationService.Close(this);
         }
     }
 }

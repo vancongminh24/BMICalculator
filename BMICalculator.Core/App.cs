@@ -12,9 +12,13 @@ namespace BMICalculator.Core
     {
         public override void Initialize()
         {
-            Mvx.RegisterType<IBMICalculatorService, BMICalculatorService>();
-
             RegisterAppStart<BMICalculatorViewModel>();
+	        RegisterServices();
         }
+
+	    protected void RegisterServices()
+	    {
+			Mvx.IoCProvider.RegisterType<IBMICalculatorService, BMICalculatorService>();
+		}
     }
 }
