@@ -13,26 +13,27 @@ namespace BMICalculator.Core.ViewModels
 {
 	public class BMICalculatorViewModel : BaseViewModel
 	{
-		readonly IBMICalculatorService _bmiCalculatorService;
-
 		private double _bmi;
-
 		public string WeightLabel => "Cân Nặng (kg)"; //same as method{ get {return "can nang";}}
 		public string HeightLabel => "Chiều Cao (m)";
 		public string BMILabel => "BMI";
 		public string CalculateLabel => "Calculate";
 		public IMvxCommand ShowBMIResultCommand { get; }
-
-		public BMICalculatorViewModel()
+		public double Weight { get; set; }
+		public double Height { get; set; }
+		public double BMI
 		{
-			
-			ShowBMIResultCommand = new MvxCommand(OnNavigateToResult);
+			get => _bmi;
+			set => SetProperty(ref _bmi, value);
+			//set
+			//{
+			//	_bmi = value;
+			//	RaisePropertyChanged(() => BMI);
+			//}
 		}
-
-		private void OnNavigateToResult()
-		{
-			CalculateBMI();
-			NavigationService.Navigate<BMIResultViewModel, double>(BMI);
+		public BMICalculatorViewModel()
+		{			
+			ShowBMIResultCommand = new MvxCommand(OnNavigateToResult);
 		}
 
 		public override async Task Initialize()
@@ -42,26 +43,15 @@ namespace BMICalculator.Core.ViewModels
 			Height = 0;
 		}
 
-		public double Weight { get; set; }
-
-		public double Height { get; set; }
-
-		public double BMI
+		private void OnNavigateToResult()
 		{
-			get => _bmi;
-			set => SetProperty(ref _bmi, value);
-			//set
-			//{
-			//	_bmi = value;
-			//	RaisePropertyChanged(() => BMI);
-
-			//}
+			CalculateBMI();
+			NavigationService.Navigate<BMIResultViewModel, double>(BMI);
 		}
 
 		public void CalculateBMI()
 		{
-			var bmiCalculatorService = Mvx.IoCProvider.Resolve<IBMICalculatorService>();
-			BMI = bmiCalculatorService.CalculateBMI(Weight, Height);
+			BMI = BMICalculatorService.CalculateBMI(Weight, Height);
 		}
 	}
 }

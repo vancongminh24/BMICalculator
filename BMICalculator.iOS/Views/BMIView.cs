@@ -49,7 +49,7 @@ namespace Blank.Views
 			};
 			
 			View.Add(_weightLabel);
-
+			
 			View.AddConstraints(new []
 			{
 				NSLayoutConstraint.Create(_weightLabel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, View, NSLayoutAttribute.Top, 1, 70),
